@@ -1,4 +1,4 @@
-// Local storage keys
+// Local storage keys (kept for offline/legacy use)
 const KEYS = {
   transactions: 'hm_transactions',
   members: 'hm_members',
@@ -8,7 +8,7 @@ const KEYS = {
 };
 
 // Default data
-const defaultCategories = [
+export const defaultCategories = [
   { id: 'c1', name: 'מזון וקניות', type: 'expense', color: '#ef4444', icon: '🛒' },
   { id: 'c2', name: 'דיור ושכירות', type: 'expense', color: '#f59e0b', icon: '🏠' },
   { id: 'c3', name: 'רכב ותחבורה', type: 'expense', color: '#8b5cf6', icon: '🚗' },
@@ -26,18 +26,18 @@ const defaultCategories = [
   { id: 'c15', name: 'הכנסה אחרת', type: 'income', color: '#94a3b8', icon: '💵' },
 ];
 
-const defaultMembers = [
+export const defaultMembers = [
   { id: 'm1', name: 'ראש המשפחה', role: 'מבוגר', color: '#4f46e5', emoji: '👨' },
   { id: 'm2', name: 'בן/בת זוג', role: 'מבוגר', color: '#10b981', emoji: '👩' },
 ];
 
-const defaultSettings = {
+export const defaultSettings = {
   currency: '₪',
   familyName: 'משפחת ישראל',
 };
 
 // Generate sample transactions
-function generateSampleData() {
+export function generateSampleData() {
   const now = new Date();
   const transactions = [];
   const months = 3;
@@ -97,7 +97,7 @@ function generateSampleData() {
   return transactions;
 }
 
-const defaultBudgets = [
+export const defaultBudgets = [
   { id: 'b1', categoryId: 'c1', amount: 2500, month: '' },
   { id: 'b2', categoryId: 'c2', amount: 4500, month: '' },
   { id: 'b3', categoryId: 'c3', amount: 800, month: '' },
