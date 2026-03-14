@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Save, AlertTriangle, RotateCcw } from 'lucide-react';
 import { useToast } from './Toast';
+import { useAuth } from '../contexts/AuthContext';
 
 const CURRENCIES = [
   { value: '₪', label: '₪ שקל (ILS)' },
@@ -11,7 +12,9 @@ const CURRENCIES = [
 
 export default function Settings({ settings, setSettings }) {
   const [form, setForm] = useState({ ...settings });
+  const [resetting, setResetting] = useState(false);
   const toast = useToast();
+  const { resetFamilyData } = useAuth();
 
   function handleSave(e) {
     e.preventDefault();
@@ -19,12 +22,16 @@ export default function Settings({ settings, setSettings }) {
     toast('הגדרות נשמרו בהצלחה');
   }
 
-  function handleReset() {
+  async function handleReset() {
     if (!window.confirm('האם לאפס את כל הנתונים?\nפעולה זו תמחק את כל העסקאות, התקציבים, חברי המשפחה והקטגוריות ואינה הפיכה!')) return;
-    ['hm_transactions', 'hm_categories', 'hm_members', 'hm_budgets', 'hm_settings'].forEach(k =>
-      localStorage.removeItem(k)
-    );
-    window.location.reload();
+    setResetting(true);
+    try {
+      await resetFamilyData();
+      toast('הנתונים אופסו בהצלחה');
+    } catch (e) {
+      toast('שגיאה באיפוס הנתונים');
+    }
+    setResetting(false);
   }
 
   return (
@@ -78,8 +85,8 @@ export default function Settings({ settings, setSettings }) {
             איפוס כל הנתונים ימחק לצמיתות את כל העסקאות, התקציבים, חברי המשפחה והקטגוריות שהוגדרו.
             הנתונים יחזרו לברירת המחדל.
           </p>
-          <button type="button" className="btn btn-danger" onClick={handleReset}>
-            <RotateCcw size={16} /> איפוס כל הנתונים
+          <button type="button" className="btn btn-danger" onClick={handleReset} disabled={resetting}>
+            <RotateCcw size={16} /> {resetting ? 'מאפס...' : 'איפוס כל הנתונים'}
           </button>
         </div>
       </div>

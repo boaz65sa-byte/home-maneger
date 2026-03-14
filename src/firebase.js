@@ -4,12 +4,12 @@ import { getFirestore } from 'firebase/firestore';
 
 // TODO: החלף עם הפרטים שלך מ-Firebase Console
 const firebaseConfig = {
-  apiKey: "REPLACE_WITH_YOUR_API_KEY",
-  authDomain: "REPLACE_WITH_YOUR_AUTH_DOMAIN",
-  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID",
-  appId: "REPLACE_WITH_YOUR_APP_ID"
+  apiKey: "AIzaSyDBwrwv-UDiVLaRaVOFQkZdiBaIm2RkcB8",
+  authDomain: "home-manager-2ff9c.firebaseapp.com",
+  projectId: "home-manager-2ff9c",
+  storageBucket: "home-manager-2ff9c.firebasestorage.app",
+  messagingSenderId: "904743304166",
+  appId: "1:904743304166:web:f471a63a89f4b59c41b427"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -229,6 +229,35 @@ export function AuthProvider({ children }) {
     await updateDoc(doc(db, 'families', userDoc.familyId), { settings: newSettings });
   }
 
+  async function resetFamilyData() {
+    const { getDocs } = await import('firebase/firestore');
+    const familyId = userDoc.familyId;
+    const cols = ['transactions', 'categories', 'members', 'budgets'];
+
+    // Delete all existing docs
+    for (const col of cols) {
+      const snap = await getDocs(collection(db, 'families', familyId, col));
+      await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+    }
+
+    // Reseed with defaults
+    const batch = [];
+    for (const cat of defaultCategories) {
+      batch.push(addDoc(collection(db, 'families', familyId, 'categories'), cat));
+    }
+    for (const mem of defaultMembers) {
+      batch.push(addDoc(collection(db, 'families', familyId, 'members'), mem));
+    }
+    for (const bud of defaultBudgets) {
+      batch.push(addDoc(collection(db, 'families', familyId, 'budgets'), bud));
+    }
+    const sampleTx = generateSampleData();
+    for (const tx of sampleTx) {
+      batch.push(addDoc(collection(db, 'families', familyId, 'transactions'), tx));
+    }
+    await Promise.all(batch);
+  }
+
   const value = {
     user,
     userDoc,
@@ -259,6 +288,7 @@ export function AuthProvider({ children }) {
     updateBudget,
     deleteBudget,
     updateSettings,
+    resetFamilyData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
