@@ -64,11 +64,6 @@ function AppInner() {
   if (!userDoc?.familyId) return <FamilySetup />;
 
   // Adapters: bridge Firestore ops to component-expected setState-style interface
-  const setTransactions = (val) => {
-    // Components pass full arrays; we diff and apply
-    // For simplicity, components should use add/update/delete directly
-    // but we keep this for backward compat by doing nothing (Firestore is real-time)
-  };
 
   const makeSetters = (addFn, updateFn, deleteFn, current) => (val) => {
     const next = typeof val === 'function' ? val(current) : val;

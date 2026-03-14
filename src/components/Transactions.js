@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, Search, Edit2, Trash2, Filter } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
 import { formatCurrency, formatDate, getMonthKey, generateId, MONTHS_HE, parseMonthKey } from '../store';
 import { useToast } from './Toast';
 
