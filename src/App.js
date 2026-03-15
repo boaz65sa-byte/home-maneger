@@ -168,6 +168,12 @@ function AppInner() {
           </div>
         )}
 
+        {/* Branding */}
+        <div className="sidebar-brand">
+          <span className="bs-brand-logo small">bs</span>
+          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', lineHeight: 1.4 }}>bs-simple<br/>פתרונות יצירתיים</span>
+        </div>
+
         {/* User info + logout */}
         <div className="sidebar-footer">
           {user?.photoURL && (

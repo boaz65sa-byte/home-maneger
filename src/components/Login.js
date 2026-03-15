@@ -64,6 +64,11 @@ export default function Login() {
         <p className="login-note" style={{ marginTop: 6 }}>
           רק עבור {ADMIN_EMAIL}
         </p>
+
+        <div className="bs-brand">
+          <span className="bs-brand-logo">bs</span>
+          <span className="bs-brand-text">bs-simple | פתרונות יצירתיים | בועז סעדה</span>
+        </div>
       </div>
     </div>
   );
