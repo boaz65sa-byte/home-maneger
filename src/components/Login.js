@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { ADMIN_EMAIL } from '../firebase';
 
 export default function Login() {
   const { loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  async function handleGoogle() {
+  async function handleGoogle(isAdmin = false) {
     setLoading(true);
     setError('');
     try {
       await loginWithGoogle();
     } catch (e) {
-      setError('ההתחברות נכשלה. נסה שוב.');
+      if (e.code === 'auth/popup-closed-by-user') {
+        setError('');
+      } else {
+        setError('ההתחברות נכשלה. נסה שוב.');
+      }
     }
     setLoading(false);
   }
@@ -33,7 +38,7 @@ export default function Login() {
 
         {error && <div className="login-error">{error}</div>}
 
-        <button className="google-btn" onClick={handleGoogle} disabled={loading}>
+        <button className="google-btn" onClick={() => handleGoogle(false)} disabled={loading}>
           {loading ? (
             <span className="login-spinner" />
           ) : (
@@ -50,6 +55,15 @@ export default function Login() {
         </button>
 
         <p className="login-note">כל משפחה מקבלת מרחב נתונים פרטי ומאובטח</p>
+
+        <div className="login-divider" />
+
+        <button className="admin-login-btn" onClick={() => handleGoogle(true)} disabled={loading}>
+          🛡️ כניסת מנהל מערכת
+        </button>
+        <p className="login-note" style={{ marginTop: 6 }}>
+          רק עבור {ADMIN_EMAIL}
+        </p>
       </div>
     </div>
   );

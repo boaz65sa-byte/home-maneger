@@ -741,3 +741,42 @@ select.form-control { cursor: pointer; }
 .role-admin { background: #fef3c7; color: #92400e; }
 .role-parent { background: #dcfce7; color: #166534; }
 .role-member { background: #f1f5f9; color: #475569; }
+
+.admin-action-btn {
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.admin-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.admin-action-btn.ban { background: #fef2f2; color: #dc2626; }
+.admin-action-btn.ban:hover { background: #fee2e2; }
+.admin-action-btn.unban { background: #f0fdf4; color: #16a34a; }
+.admin-action-btn.unban:hover { background: #dcfce7; }
+.admin-action-btn.delete { background: #f8fafc; color: #64748b; }
+.admin-action-btn.delete:hover { background: #fef2f2; color: #dc2626; }
+
+/* Admin login button */
+.login-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 20px 0 16px;
+}
+.admin-login-btn {
+  width: 100%;
+  padding: 11px 20px;
+  background: #f8fafc;
+  color: #475569;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.admin-login-btn:hover { border-color: #4f46e5; color: #4f46e5; background: #eef2ff; }
+.admin-login-btn:disabled { opacity: 0.6; cursor: not-allowed; }

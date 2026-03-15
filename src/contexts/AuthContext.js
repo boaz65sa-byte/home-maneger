@@ -60,7 +60,13 @@ export function AuthProvider({ children }) {
           await setDoc(userRef, newUser);
           setUserDoc(newUser);
         } else {
-          setUserDoc(userSnap.data());
+          const data = userSnap.data();
+          if (data.banned) {
+            await signOut(auth);
+            alert('החשבון שלך נחסם. לפרטים פנה למנהל המערכת.');
+            return;
+          }
+          setUserDoc(data);
         }
       } else {
         setUserDoc(null);
